@@ -1,44 +1,29 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
+"""
+
+Script que abre el fichero /etc/passwd, toma todas sus líneas
+en una lista e imprime, para cada identificador de usuario, la
+shell que utiliza
+
+"""
+
+# Abre el fichero en modo lectura
 fich = open("/etc/passwd","r")
-# LISTA DE LINEAS
+# Leemos todas las líneas del archivo
 lineas = fich.readlines()
 
-#lineas[:1] # ['pepepepepepe'] LISTA
-#lineas[0] # 'pepepepepepepe' STRING
-
-## FORMA 1
-#
-## [:2] - PRIMERA Y SEGUNDA LINEA
-## for linea in lineas[:2]:
-#for linea in lineas:
-#    print(linea)
-#    pos_fin = linea.find(":")
-#    # LOGIN
-#    login = linea [:pos_fin]
-#    # -1: es el /n
-#    # SHELL    
-#    # pos_com - COMIENZO
-#    pos_com = linea.rfind(":")
-#    # + 1 SIGUIENTE POSICIÓN A LOS :
-#    shell = linea[pos_com + 1:-1]
-#    print(login, shell)
-#
-#
-## FORMA 2
-#
-#for linea in lineas:
-#        elementos = linea.split()
-##        print(elementos)
-#        login = elementos[0]
-#        shell = elementos[-1]
-#        print(login, shell)
-#        shell_bueno = shell[:-1]
-#        print(login, shell_bueno)
-
-
-# FORMA 3
+# Que recorra todas las líneas y que me escoja la que yo quiero
 
 for linea in lineas:
+        # Dividimos en trozos a partir del carácter delimitador ':' y
+        # cogemos el trozo que nos interesa. Para el caso del login es 
+        # la posición 0 y para la shell podemos poner [6] o [-1]; con 
+        # [-1] sería como el anterior al primero, que es la última posición,
+        # y con [6] porque la shell está en la posición 6 de nuestra lista.
         login = linea.split(':')[0]
-        shell = linea.split(':')[-1][:-1]
+        shell = linea.split(':')[6][:-1]
         print(login, shell)
+        
+      
